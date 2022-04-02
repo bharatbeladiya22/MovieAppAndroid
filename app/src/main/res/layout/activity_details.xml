@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.imdb.movieapp.data.Movie" />
+
+        <variable
+            name="details"
+            type="com.imdb.movieapp.data.ResponseDetails" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.details.DetailsActivity">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_title"
+                android:padding="16dp"
+                android:text="@{item.title}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Title" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="24dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="24dp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivPoster"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="true"
+                app:imageUrl="@{item.posterPath}"
+                app:layout_constraintDimensionRatio="w,185:278"
+                app:layout_constraintStart_toEndOf="@+id/guideStart"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                tools:src="@drawable/place_holder" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{item.releaseDate}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/ivPoster"
+                app:layout_constraintTop_toTopOf="@+id/ivPoster"
+                tools:text="2018" />
+
+            <TextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{details.runtimeString}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                app:layout_constraintStart_toStartOf="@+id/tvDate"
+                app:layout_constraintTop_toBottomOf="@+id/tvDate"
+                tools:text="128 mins" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_to_favorite"
+                app:backgroundTint="@color/bg_title"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPoster"
+                app:layout_constraintStart_toStartOf="@+id/tvDate" />
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text='@{item.voteAverage+"/10"}'
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/btnAddFavorite"
+                app:layout_constraintStart_toStartOf="@+id/tvDate"
+                tools:text="8.0/10" />
+
+            <TextView
+                android:id="@+id/tvOverview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:text='@{item.overview}'
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textColor="#757575"
+                app:layout_constraintEnd_toEndOf="@+id/guideEnd"
+                app:layout_constraintStart_toStartOf="@+id/ivPoster"
+                app:layout_constraintTop_toBottomOf="@+id/ivPoster"
+                tools:text="Overview" />
+
+            <TextView
+                android:id="@+id/lblTrailer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Trailers"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintStart_toStartOf="@+id/ivPoster"
+                app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTrailer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="@+id/guideEnd"
+                app:layout_constraintStart_toStartOf="@+id/ivPoster"
+                app:layout_constraintTop_toBottomOf="@+id/lblTrailer"
+                tools:listitem="@layout/item_trailer" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
