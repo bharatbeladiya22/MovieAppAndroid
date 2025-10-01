@@ -38,7 +38,6 @@ Movie App is an Android application designed to showcase a list of movies, allow
     *   RecyclerView for displaying lists.
     *   ConstraintLayout for flexible layouts.
 
-## Setup and Installation
-
-1.  **Clone the repository:**
-    
+## Screenshots
+1. https://github.com/bharatbeladiya22/MovieAppAndroid/blob/master/screenshots/Screenshot_20251001_115437.png
+2. https://github.com/bharatbeladiya22/MovieAppAndroid/blob/master/screenshots/Screenshot_20251001_115501.png
