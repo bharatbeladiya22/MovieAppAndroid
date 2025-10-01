@@ -29,7 +29,25 @@ class MovieDataSource(private val movieRepository: MovieRepository) : PagingSour
                 nextKey = currentLoadingPageKey.plus(1)
             )
         } catch (e: Exception) {
-            return LoadResult.Error(e)
+            return when (e) {
+                is retrofit2.HttpException -> {
+                    when (e.code()) {
+                        400 -> LoadResult.Error(Throwable("Bad Request: The server could not understand the request due to invalid syntax."))
+                        401 -> LoadResult.Error(Throwable("Unauthorized: Invalid API key or authentication credentials."))
+                        403 -> LoadResult.Error(Throwable("Forbidden: You do not have permission to access this resource."))
+                        404 -> LoadResult.Error(Throwable("Not Found: The requested resource could not be found."))
+                        429 -> LoadResult.Error(Throwable("Too Many Requests: You have exceeded the rate limit."))
+                        500 -> LoadResult.Error(Throwable("Internal Server Error: Something went wrong on the server."))
+                        502 -> LoadResult.Error(Throwable("Bad Gateway: The server received an invalid response from an upstream server."))
+                        503 -> LoadResult.Error(Throwable("Service Unavailable: The server is temporarily unable to handle the request."))
+                        504 -> LoadResult.Error(Throwable("Gateway Timeout: The server did not receive a timely response from an upstream server."))
+                        else -> LoadResult.Error(Throwable("HTTP error ${e.code()}: ${e.message()}"))
+                    }
+                }
+                is java.io.IOException -> LoadResult.Error(Throwable("Network error: Please check your internet connection and try again."))
+                is SecurityException -> LoadResult.Error(Throwable("Security error: Permission denied."))
+                else -> LoadResult.Error(Throwable("An unexpected error occurred: ${e.localizedMessage}"))
+            }
         }
     }
 

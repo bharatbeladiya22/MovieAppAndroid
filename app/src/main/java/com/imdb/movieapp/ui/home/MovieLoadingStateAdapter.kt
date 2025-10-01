@@ -1,5 +1,6 @@
 package com.imdb.movieapp.ui.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
