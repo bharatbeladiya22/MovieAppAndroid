@@ -39,5 +39,6 @@ Movie App is an Android application designed to showcase a list of movies, allow
     *   ConstraintLayout for flexible layouts.
 
 ## Screenshots
-1. https://github.com/bharatbeladiya22/MovieAppAndroid/blob/master/screenshots/Screenshot_20251001_115437.png
-2. https://github.com/bharatbeladiya22/MovieAppAndroid/blob/master/screenshots/Screenshot_20251001_115501.png
+![Movie Listing](https://github.com/bharatbeladiya22/MovieAppAndroid/blob/master/screenshots/Screenshot_20251001_115501.png)
+
+![Movie Details](https://github.com/bharatbeladiya22/MovieAppAndroid/blob/master/screenshots/Screenshot_20251001_115437.png)
